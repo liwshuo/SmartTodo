@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:Android="http://schemas.android.com/apk/res/android" >
+    <item>
+        <shape Android:shape="rectangle" >
+            <!-- 渐变色，起始颜色和结束颜色 -->
+            <gradient
+                Android:startColor="#0f000000"
+                Android:endColor="#0f000000"
+                />
+        </shape>
+    </item>
+    <item Android:bottom="3dp"
+           Android:right="3dp">
+        <shape Android:shape="rectangle" >
+            <gradient
+                Android:startColor="#ffffff"
+                Android:endColor="#ffffff" />
+            <padding
+                Android:bottom="3dp"
+                Android:left="5dp"
+                Android:right="5dp"
+                Android:top="3dp" />
+        </shape>
+    </item>
+    </layer-list>

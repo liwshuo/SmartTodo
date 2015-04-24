@@ -1,0 +1,18 @@
+<resources>
+    values/themes.xml:
+
+    <style name="Theme.MyTheme" parent="Theme.AppCompat">
+        <!-- Set AppCompat’s actionBarStyle -->
+
+       <item name="colorPrimary">@color/myColorPrimary</item>
+        <item name="colorPrimaryDark">@color/myColorPrimaryDark</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowActionModeOverlay">true</item>
+        <!-- Set AppCompat’s color theming attrs -->
+        <item name="colorControlNormal">#c5c5c5</item>
+        <item name="colorControlActivated">#c5c5c5</item>
+        <item name="colorControlHighlight">#c5c5c5</item>
+    <!-- The rest of your attributes -->
+    </style>
+</resources>
