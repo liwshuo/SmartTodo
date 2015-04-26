@@ -14,6 +14,9 @@ import com.liwshuo.smarttodo.utils.TimeUtils;
 
 import java.util.Calendar;
 
+/**
+ * 用于展示TimePicker控件的Activity
+ */
 public class TimePickerActivity extends Activity implements View.OnClickListener {
 
     private TextView datePickerView;
@@ -46,6 +49,12 @@ public class TimePickerActivity extends Activity implements View.OnClickListener
 
     }
 
+    /**
+     * 方便其他组件启动该Activity
+     * @param context
+     * @param dateAndTime
+     * @param requestCode
+     */
     public static void actionStartForActivity(Context context, String dateAndTime, int requestCode) {
         Intent intent = new Intent(context, TimePickerActivity.class);
         Bundle bundle = new Bundle();
@@ -54,7 +63,10 @@ public class TimePickerActivity extends Activity implements View.OnClickListener
         ((Activity) context).startActivityForResult(intent, requestCode);
     }
 
-
+    /**
+     * 将日期和时间返回给启动该Activity的组件
+     * @param v
+     */
     @Override
     public void onClick(View v) {
         switch (v.getId()) {

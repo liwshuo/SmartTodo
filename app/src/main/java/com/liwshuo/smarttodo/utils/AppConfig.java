@@ -1,6 +1,7 @@
 package com.liwshuo.smarttodo.utils;
 
 /**
+ * 提供了一些常量
  * Created by shuo on 2015/4/16.
  */
 public class AppConfig {

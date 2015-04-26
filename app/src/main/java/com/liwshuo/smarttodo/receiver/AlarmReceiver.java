@@ -13,6 +13,9 @@ import android.widget.Toast;
 import com.liwshuo.smarttodo.R;
 import com.liwshuo.smarttodo.activity.TodoListActivity;
 
+/**
+ * 当提醒到时的时候，会触发该Receiver，创建通知栏提醒信息
+ */
 public class AlarmReceiver extends BroadcastReceiver {
     public AlarmReceiver() {
     }

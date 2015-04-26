@@ -3,6 +3,7 @@ package com.liwshuo.smarttodo.utils;
 import android.util.Log;
 
 /**
+ * 用于打印信息，当设置LEVEL为NOTHING级别的时候，所有的log操作均不会打印信息
  * Created by shuo on 2015/4/16.
  */
 public class LogUtil {

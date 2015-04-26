@@ -4,21 +4,22 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
+ * Todo的类
  * Created by shuo on 2015/4/16.
  */
 public class TodoMsg implements Parcelable {
-    private int _id;
-    private String todoTitle;
-    private String todoNote;
-    private String todoDate;
-    private String todoTime;
-    private String todoRepeatWeek;
-    private String todoRepeatMonth;
-    private String todoColor;
-    private int todoType;
-    private String todoCreateTime;
-    private String todoUpdateTime;
-    private String todoTag;
+    private int _id; //id
+    private String todoTitle; //todo的title,即显示在主界面里的内容
+    private String todoNote; //todo的备注
+    private String todoDate; //todo提醒的日期
+    private String todoTime; //todo提醒的时间
+    private String todoRepeatWeek; //todo按星期重复
+    private String todoRepeatMonth; // Todo按月份重复
+    private String todoColor; //Todo的颜色
+    private int todoType; //Todo的类型，包括today later done
+    private String todoCreateTime; //todo创建的时间
+    private String todoUpdateTime; //todo最后一次更新的时间
+    private String todoTag; //todo的标签
 
     public void set_id(int _id) {
         this._id = _id;

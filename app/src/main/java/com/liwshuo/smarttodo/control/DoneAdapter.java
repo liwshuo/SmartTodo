@@ -24,6 +24,13 @@ public class DoneAdapter extends BaseAdapter {
         super(context, c, flags);
     }
 
+    /**
+     * 创建视图
+     * @param context
+     * @param cursor
+     * @param parent
+     * @return
+     */
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
         ViewHolder viewHolder = new ViewHolder();
@@ -38,6 +45,12 @@ public class DoneAdapter extends BaseAdapter {
         return view;
     }
 
+    /**
+     * 将数据绑定到视图
+     * @param view
+     * @param context
+     * @param cursor
+     */
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
         ViewHolder viewHolder = (ViewHolder) view.getTag();

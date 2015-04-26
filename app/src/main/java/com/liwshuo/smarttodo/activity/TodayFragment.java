@@ -22,6 +22,7 @@ import com.liwshuo.smarttodo.utils.AppConfig;
 import com.liwshuo.smarttodo.utils.LogUtil;
 
 /**
+ * 展示今天要做的Todo
  * Created by liwshuo on 2015/4/19.
  */
 public class TodayFragment extends Fragment implements SlideListViewWithoutVelocity.SlideListener, AdapterView.OnItemClickListener {
@@ -46,6 +47,11 @@ public class TodayFragment extends Fragment implements SlideListViewWithoutVeloc
         notifyDataChanged();
     }
 
+    /**
+     *设置不同滑动方式的处理方式
+     * @param direction
+     * @param i
+     */
     @Override
     public void slideItem(SlideListViewWithoutVelocity.SlideDirection direction, int i) {
         if (direction == SlideListViewWithoutVelocity.SlideDirection.LEFTLEVELTWO) {
@@ -67,20 +73,36 @@ public class TodayFragment extends Fragment implements SlideListViewWithoutVeloc
 
     }
 
+    /**
+     *刷新界面
+     */
     public void notifyDataChanged() {
         todayAdapter.swapCursor(DBManager.getInstance().getTodayTodo());
         todayAdapter.notifyDataSetChanged();
     }
 
+    /**
+     *点击item后启动修改Todo信息的界面
+     * @param parent
+     * @param view
+     * @param position
+     * @param id
+     */
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         TodoMsg todoMsg = todayAdapter.getTodoMsg(position);
         TodoDetailActivity.actionStart(getActivity(), todoMsg, AppConfig.TODO_TODAY_TYPE);
     }
 
+    /**
+     *
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode,resultCode,data);
+     //   super.onActivityResult(requestCode,resultCode,data);
         LogUtil.d(TAG, "fragmentindex");
 
     }

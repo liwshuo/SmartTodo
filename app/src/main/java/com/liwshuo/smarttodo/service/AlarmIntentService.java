@@ -14,7 +14,9 @@ import com.liwshuo.smarttodo.utils.LogUtil;
 
 import java.util.Calendar;
 
-
+/**
+ * 在该IntentService中创建提醒
+ */
 public class AlarmIntentService extends IntentService {
 
     private static final String TAG = AlarmIntentService.class.getSimpleName();

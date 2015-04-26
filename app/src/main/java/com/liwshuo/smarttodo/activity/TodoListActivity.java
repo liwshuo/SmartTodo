@@ -19,10 +19,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+/**
+ * 用于承载三个Fragment的界面，
+ */
 public class TodoListActivity extends ActionBarActivity {
     private static final String TAG = TodoListActivity.class.getSimpleName();
     private ViewPager viewPager;
-    private List<Fragment> fragmentList;
+    private List<Fragment> fragmentList;  //保存三个fragment，作为参数传入TodoFragmentPagerAdapter中
     private FloatingActionButton buttonFloat;
     Fragment todayFragment;
     Fragment laterFragment;
@@ -40,6 +43,9 @@ public class TodoListActivity extends ActionBarActivity {
           //  toolbar.setOnMenuItemClickListener(new ToolBarOnMenuItemClickListener());
         }
         buttonFloat = (FloatingActionButton) findViewById(R.id.buttonFloat);
+        /**
+         * 设置viewPager，将三个fragment放入viewPager中，并将TodayFragment设为默认
+         */
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         fragmentList = new ArrayList<Fragment>();
         todayFragment = new TodayFragment();
@@ -56,12 +62,15 @@ public class TodoListActivity extends ActionBarActivity {
         buttonFloat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TodoAddActivity.actionStart(TodoListActivity.this);
+                TodoAddActivity.actionStart(TodoListActivity.this);  //启动TodoListActivity
             }
         });
-        ClipboardService.actionStart(this);
+        ClipboardService.actionStart(this);//启动ClipboardService
     }
 
+    /**
+     * viewPager中页面切换的监听器
+     */
     public class TodoOnPageChangeListener implements ViewPager.OnPageChangeListener {
 
         @Override
@@ -86,7 +95,13 @@ public class TodoListActivity extends ActionBarActivity {
         }
     }
 
-    @Override
+    /**
+     * 在主界面里更新Fragment
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
+ /*   @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
          //   switch (requestCode) {
@@ -102,5 +117,5 @@ public class TodoListActivity extends ActionBarActivity {
     //        }
         }
         super.onActivityResult(requestCode, resultCode, data);
-    }
+    }*/
 }

@@ -12,6 +12,7 @@ import com.liwshuo.smarttodo.utils.AppConfig;
 import com.liwshuo.smarttodo.utils.LogUtil;
 
 /**
+ * 三种类型Todo的Adapter的基类，实现了获取TodoId以及创建TodoMsg对象的方法
  * Created by liwshuo on 2015/4/21.
  */
 public abstract class BaseAdapter extends CursorAdapter {
@@ -20,6 +21,11 @@ public abstract class BaseAdapter extends CursorAdapter {
         super(context, c, flags);
     }
 
+    /**
+     * 通过item的当前位置，找到该item对应的TodoMsg的_id
+     * @param i
+     * @return
+     */
     public int getTodoMsgId(int i) {
         int _id = -1;
         Cursor cursor = getCursor();
@@ -29,6 +35,11 @@ public abstract class BaseAdapter extends CursorAdapter {
         return _id;
     }
 
+    /**
+     * 通过item的当前位置，找到该item对应的TodoMsg，并创建及返回该TodoMsg对象
+     * @param i
+     * @return
+     */
     public TodoMsg getTodoMsg(int i) {
         TodoMsg todoMsg = new TodoMsg();
         Cursor cursor = getCursor();

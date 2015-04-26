@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import java.util.List;
 
 /**
+ * viewPager的适配器，用于绑定fragment
  * Created by liwshuo on 2015/4/19.
  */
 public class TodoFragmentPagerAdapter extends FragmentPagerAdapter {

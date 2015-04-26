@@ -22,6 +22,9 @@ import com.liwshuo.smarttodo.utils.AppConfig;
 import com.liwshuo.smarttodo.utils.LogUtil;
 import com.liwshuo.smarttodo.utils.TimeUtils;
 
+/**
+ * Todo的详细信息界面显示，可以修改Todo信息
+ */
 public class TodoDetailActivity extends Activity implements View.OnClickListener{
     private final static String TAG = TodoDetailActivity.class.getSimpleName();
     private EditText todoTitleText;
@@ -72,7 +75,7 @@ public class TodoDetailActivity extends Activity implements View.OnClickListener
         LogUtil.d(TAG, todoMsg.getTodoTitle());
         bundle.putParcelable("todoMsg", todoMsg);
         intent.putExtras(bundle);
-        ((TodoListActivity)context).startActivityForResult(intent, requestCode);
+        ((TodoListActivity)context).startActivityForResult(intent, requestCode);  //因为这边使用了activity的startActivityForResult，导致了我的Fragment无法调用onActivityResult方法，这种情况就只会调用其Activity的该方法。因此会出现在Fragment中写该方法无效的情况
     }
 
     @Override
@@ -108,6 +111,9 @@ public class TodoDetailActivity extends Activity implements View.OnClickListener
         }
     }
 
+    /**
+     * 生成待更新的Todo
+     */
     private void generateTodoMsg() {
         String todoTitle = todoTitleText.getText().toString();
         String todoNote = todoNoteText.getText().toString();

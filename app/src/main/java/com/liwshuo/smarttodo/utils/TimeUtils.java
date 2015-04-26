@@ -3,6 +3,7 @@ package com.liwshuo.smarttodo.utils;
 import java.util.Calendar;
 
 /**
+ * 提供各种时间信息
  * Created by shuo on 2015/4/10.
  */
 public class TimeUtils {
@@ -34,6 +35,10 @@ public class TimeUtils {
         return dateTime.toString();
     }
 
+    /**
+     * 获取当前时间,不包含秒，格式为 year-month-day hour:minute
+     * @return
+     */
     public String getCurrentDateAndTimeWithoutSecond() {
         Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
@@ -55,6 +60,10 @@ public class TimeUtils {
         return dateTime.toString();
     }
 
+    /**
+     * 获取当前的日期
+     * @return
+     */
     public String getCurrentDate() {
         Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
@@ -69,6 +78,10 @@ public class TimeUtils {
         return date.toString();
     }
 
+    /**
+     * 获取包含秒的当前时间
+     * @return
+     */
     public String getCurrentTimeWithSecond() {
         Calendar calendar = Calendar.getInstance();
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
@@ -82,6 +95,11 @@ public class TimeUtils {
         time.append(second > 0 && second < 10 ? "0"+second : second);
         return time.toString();
     }
+
+    /**
+     * 获取不包含秒的当前时间
+     * @return
+     */
     public String getCurrentTimeWithoutSecond() {
         Calendar calendar = Calendar.getInstance();
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
@@ -94,7 +112,10 @@ public class TimeUtils {
     }
 
 
-
+    /**
+     * 通过该方法创建一个依赖于时间的值，该值用于唯一确定PendingIntent，也即唯一确定AlarmManager，这样便不会出现覆盖旧Alarm的情况
+     * @return
+     */
     public int getTimeStamp() {
         Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);

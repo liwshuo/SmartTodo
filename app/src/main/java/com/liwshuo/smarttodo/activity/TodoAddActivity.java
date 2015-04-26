@@ -24,6 +24,9 @@ import com.liwshuo.smarttodo.utils.TimeUtils;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ * 添加新Todo的界面
+ */
 public class TodoAddActivity extends ActionBarActivity implements View.OnClickListener, EditText.OnEditorActionListener{
 
     private EditText newTodo;
@@ -52,11 +55,19 @@ public class TodoAddActivity extends ActionBarActivity implements View.OnClickLi
         }, 500);
     }
 
+    /**
+     * 方便其他组件启动该Activity,只需在其他组件里调用TodoDetailActivity.actionStart(context)即可
+     * @param context
+     */
     public static void actionStart(Context context) {
         Intent intent = new Intent(context, TodoAddActivity.class);
         context.startActivity(intent);
     }
 
+    /**
+     * 点击响应操作
+     * @param v
+     */
     @Override
     public void onClick(View v) {
         switch (v.getId()) {

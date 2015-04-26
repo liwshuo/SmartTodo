@@ -18,6 +18,7 @@ import com.liwshuo.smarttodo.utils.TimeUtils;
 
 
 /**
+ * 在该Service中捕获用户的复制操作，并讲用户的复制内容自动添加到Todo里
  * Created by shuo on 2015/4/16.
  */
 public class ClipboardService extends Service {

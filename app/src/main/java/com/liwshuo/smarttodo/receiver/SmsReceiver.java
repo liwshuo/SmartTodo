@@ -18,7 +18,9 @@ import com.liwshuo.smarttodo.activity.TodoListActivity;
 import com.liwshuo.smarttodo.data.DBManager;
 import com.liwshuo.smarttodo.data.TodoMsg;
 
-
+/**
+ * 拦截接收短信的广播，过滤要自动创建Todo的短信
+ */
 public class SmsReceiver extends BroadcastReceiver {
     public SmsReceiver() {
 

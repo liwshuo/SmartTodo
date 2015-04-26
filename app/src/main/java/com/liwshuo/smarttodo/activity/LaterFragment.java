@@ -21,6 +21,7 @@ import com.liwshuo.smarttodo.utils.AppConfig;
 import com.liwshuo.smarttodo.utils.LogUtil;
 
 /**
+ * 展示将来要处理的Todo
  * Created by liwshuo on 2015/4/19.
  */
 public class LaterFragment extends Fragment implements SlideListViewWithoutVelocity.SlideListener,AdapterView.OnItemClickListener{
@@ -42,6 +43,12 @@ public class LaterFragment extends Fragment implements SlideListViewWithoutVeloc
         super.onStart();
         notifyDataChanged();
     }
+
+    /**
+     * 设置不同滑动方式的处理方式
+     * @param direction
+     * @param i
+     */
     @Override
     public void slideItem(SlideListViewWithoutVelocity.SlideDirection direction, int i) {
         if (direction == SlideListViewWithoutVelocity.SlideDirection.LEFTLEVELTWO) {
@@ -57,10 +64,22 @@ public class LaterFragment extends Fragment implements SlideListViewWithoutVeloc
         ((LaterFragment)getActivity().getSupportFragmentManager().getFragments().get(1)).notifyDataChanged();
         ((DoneFragment)getActivity().getSupportFragmentManager().getFragments().get(2)).notifyDataChanged();
     }
+
+    /**
+     * 刷新界面
+     */
     public void notifyDataChanged() {
         laterAdapter.swapCursor(DBManager.getInstance().getLaterTodo());
-        laterAdapter.notifyDataSetChanged();
+        laterAdapter.notifyDataSetChanged();;
     }
+
+    /**
+     * 点击item后启动修改Todo信息的界面
+     * @param parent
+     * @param view
+     * @param position
+     * @param id
+     */
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         TodoMsg todoMsg = laterAdapter.getTodoMsg(position);

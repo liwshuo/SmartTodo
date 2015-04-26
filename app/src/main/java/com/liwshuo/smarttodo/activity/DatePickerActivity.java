@@ -17,6 +17,9 @@ import com.liwshuo.smarttodo.R;
 
 import java.util.Calendar;
 
+/**
+ * 用于展示DatePicker控件的Activity
+ */
 public class DatePickerActivity extends Activity implements View.OnClickListener {
 
     private DatePicker datePicker;
@@ -38,6 +41,13 @@ public class DatePickerActivity extends Activity implements View.OnClickListener
             datePicker.updateDate(Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH) + 1, Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
         }
     }
+
+    /**
+     * 方便其他组件启动该Activity
+     * @param context
+     * @param date
+     * @param requestCode
+     */
     public static void actionStartForActivity(Context context, String date, int requestCode) {
         Intent intent = new Intent(context, DatePickerActivity.class);
         Bundle bundle = new Bundle();
@@ -46,6 +56,10 @@ public class DatePickerActivity extends Activity implements View.OnClickListener
         ((Activity) context).startActivityForResult(intent, requestCode);
     }
 
+    /**
+     * 将日期返回给启动该Activity的组件
+     * @param v
+     */
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
