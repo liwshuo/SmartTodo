@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory>
+        <CheckBoxPreference
+            android:id="@+id/copyPreference"
+            android:title="@string/settings_copy_listener"
+            android:key="@string/settings_copy_listener_key"
+            android:defaultValue="false"/>
+  <!--      <CheckBoxPreference
+            android:id="@+id/floatWindowPreference"
+            android:title="@string/settings_float_window"
+            android:key="@string/settings_float_windows_key"
+            android:defaultValue="false"
+            android:selectable="false"/> -->
+    </PreferenceCategory>
+
+</PreferenceScreen>

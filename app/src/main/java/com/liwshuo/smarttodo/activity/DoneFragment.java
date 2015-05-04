@@ -32,7 +32,7 @@ public class DoneFragment extends Fragment implements SlideListViewWithoutVeloci
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_done, container, false);
         todoListView = (SlideListViewWithoutVelocity) view.findViewById(R.id.doneTodoList);
-        doneAdapter = new DoneAdapter(AppController.getContext(), AppController.getDbManager().getDoneTodo(), CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
+        doneAdapter = new DoneAdapter(AppController.getContext(), DBManager.getInstance().getDoneTodo(), CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
         todoListView.setAdapter(doneAdapter);
         todoListView.setSlideListener(this);
         todoListView.setOnItemClickListener(this);

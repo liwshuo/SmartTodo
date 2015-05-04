@@ -32,7 +32,7 @@ public class LaterFragment extends Fragment implements SlideListViewWithoutVeloc
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_later, container, false);
         todoListView = (SlideListViewWithoutVelocity) view.findViewById(R.id.laterTodoList);
-        laterAdapter = new LaterAdapter(AppController.getContext(), AppController.getDbManager().getLaterTodo(), CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
+        laterAdapter = new LaterAdapter(AppController.getContext(), DBManager.getInstance().getLaterTodo(), CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
         todoListView.setAdapter(laterAdapter);
         todoListView.setSlideListener(this);
         todoListView.setOnItemClickListener(this);

@@ -1,7 +1,7 @@
 <resources>
     values/themes.xml:
 
-    <style name="Theme.MyTheme" parent="Theme.AppCompat">
+    <style name="Theme.MyTheme" parent="Theme.AppCompat.Light">
         <!-- Set AppCompat’s actionBarStyle -->
 
        <item name="colorPrimary">@color/myColorPrimary</item>
