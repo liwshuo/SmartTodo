@@ -29,6 +29,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:layout_margin="16dp"
+        android:src="@drawable/add"
         fab:fab_colorNormal="@color/myColorPrimary"
         fab:fab_colorPressed="@color/myColorPrimaryDark">
 

@@ -45,7 +45,7 @@ public class LaterAdapter extends BaseAdapter {
         viewHolder.laterTodoDate.setText(cursor.getString(viewHolder.dateIndex));
     }
 
-    protected class ViewHolder{
+    static class ViewHolder{
         int titleIndex;
         int dateIndex;
         int timeIndex;

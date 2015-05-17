@@ -73,7 +73,7 @@ public class TodoListActivity extends ActionBarActivity {
                 TodoAddActivity.actionStart(TodoListActivity.this);  //启动TodoListActivity
             }
         });
-        InitIntentService.actionStart(getApplicationContext());
+        InitIntentService.actionStart(this);
 
 //        AppController.getInstance().createFloatView();
     }
@@ -113,7 +113,7 @@ public class TodoListActivity extends ActionBarActivity {
      * @param resultCode
      * @param data
      */
- /*   @Override
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
          //   switch (requestCode) {
@@ -129,7 +129,7 @@ public class TodoListActivity extends ActionBarActivity {
     //        }
         }
         super.onActivityResult(requestCode, resultCode, data);
-    }*/
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

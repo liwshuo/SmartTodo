@@ -23,7 +23,10 @@
 
         <service android:name=".service.ClipboardService" />
         <service android:name=".service.AlarmIntentService" />
-
+        <service android:name=".service.InitIntentService"/>
+        <service
+            android:name=".widget.TodoWidgetService"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
         <receiver
             android:name=".receiver.SmsReceiver"
             android:enabled="true" >
@@ -54,7 +57,7 @@
             android:windowSoftInputMode="adjustResize|stateAlwaysVisible" >
         </activity>
 
-        <receiver android:name=".activity.TodoDeskWidget" >
+        <receiver android:name=".widget.TodoDeskWidget" >
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>

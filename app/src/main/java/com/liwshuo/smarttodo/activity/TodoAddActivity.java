@@ -1,5 +1,6 @@
 package com.liwshuo.smarttodo.activity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -61,7 +62,7 @@ public class TodoAddActivity extends ActionBarActivity implements View.OnClickLi
      */
     public static void actionStart(Context context) {
         Intent intent = new Intent(context, TodoAddActivity.class);
-        context.startActivity(intent);
+        ((Activity)context).startActivityForResult(intent, 1);
     }
 
     /**
