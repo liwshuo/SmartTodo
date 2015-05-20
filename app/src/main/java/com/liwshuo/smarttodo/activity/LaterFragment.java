@@ -63,6 +63,7 @@ public class LaterFragment extends Fragment implements SlideListViewWithoutVeloc
         ((TodayFragment)getActivity().getSupportFragmentManager().getFragments().get(0)).notifyDataChanged();
         ((LaterFragment)getActivity().getSupportFragmentManager().getFragments().get(1)).notifyDataChanged();
         ((DoneFragment)getActivity().getSupportFragmentManager().getFragments().get(2)).notifyDataChanged();
+     //   AppConfig.updateWidget(getActivity());
     }
 
     /**

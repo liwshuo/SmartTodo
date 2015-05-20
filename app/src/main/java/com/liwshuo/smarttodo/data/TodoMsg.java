@@ -20,6 +20,8 @@ public class TodoMsg implements Parcelable {
     private String todoCreateTime; //todo创建的时间
     private String todoUpdateTime; //todo最后一次更新的时间
     private String todoTag; //todo的标签
+    private String todoCreateDate;
+    private String todoUpdateDate;
 
     public void set_id(int _id) {
         this._id = _id;
@@ -63,6 +65,14 @@ public class TodoMsg implements Parcelable {
 
     public void setTodoUpdateTime(String todoUpdateTime) {
         this.todoUpdateTime = todoUpdateTime;
+    }
+
+    public void setTodoCreateDate(String todoCreateDate) {
+        this.todoCreateDate = todoCreateDate;
+    }
+
+    public void setTodoUpdateDate(String todoUpdateDate) {
+        this.todoUpdateDate = todoUpdateDate;
     }
 
     public int get_id() {
@@ -117,6 +127,14 @@ public class TodoMsg implements Parcelable {
         return todoTag;
     }
 
+    public String getTodoCreateDate() {
+        return todoCreateDate;
+    }
+
+    public String getTodoUpdateDate() {
+        return todoUpdateDate;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -136,6 +154,8 @@ public class TodoMsg implements Parcelable {
         dest.writeString(todoCreateTime);
         dest.writeString(todoUpdateTime);
         dest.writeString(todoTag);
+        dest.writeString(todoCreateDate);
+        dest.writeString(todoUpdateDate);
     }
 
     public static final Creator<TodoMsg> CREATOR = new Creator<TodoMsg>() {
@@ -155,6 +175,8 @@ public class TodoMsg implements Parcelable {
             todoMsg.setTodoCreateTime(source.readString());
             todoMsg.setTodoUpdateTime(source.readString());
             todoMsg.setTodoTag(source.readString());
+            todoMsg.setTodoCreateDate(source.readString());
+            todoMsg.setTodoUpdateDate(source.readString());
             return todoMsg;
         }
 

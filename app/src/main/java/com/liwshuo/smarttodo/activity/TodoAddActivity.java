@@ -20,6 +20,7 @@ import android.widget.TextView;
 import com.liwshuo.smarttodo.R;
 import com.liwshuo.smarttodo.data.DBManager;
 import com.liwshuo.smarttodo.data.TodoMsg;
+import com.liwshuo.smarttodo.utils.AppConfig;
 import com.liwshuo.smarttodo.utils.TimeUtils;
 
 import java.util.Timer;
@@ -78,6 +79,7 @@ public class TodoAddActivity extends ActionBarActivity implements View.OnClickLi
             case R.id.newTodoButton:{
                 if(!TextUtils.isEmpty(newTodo.getText().toString())) {
                     DBManager.getInstance().addTodo(generateTodoMsg());
+                 //   AppConfig.updateWidget(this);
                     finish();
                 }else{
                     finish();
@@ -113,11 +115,19 @@ public class TodoAddActivity extends ActionBarActivity implements View.OnClickLi
         String todoDate = newTodoDate.getText().toString();
         todoMsg.setTodoTitle(todoTitle);
         if (!TextUtils.isEmpty(todoDate)) {
-            todoMsg.setTodoDate(todoDate.split(" ")[0]);
-            todoMsg.setTodoTime(todoDate.split(" ")[1]);
+            String[] todoDateArray = todoDate.split(" ");
+            todoMsg.setTodoDate(todoDateArray[0]);
+            todoMsg.setTodoTime(todoDateArray[1]);
+            if(todoDateArray[0].compareTo(new TimeUtils().getCurrentDate()) > 0){
+                todoMsg.setTodoType(AppConfig.TODO_LATER_TYPE);
+            }else {
+                todoMsg.setTodoType(AppConfig.TODO_TODAY_TYPE);
+            }
+        }else {
+            todoMsg.setTodoType(AppConfig.TODO_TODAY_TYPE);
         }
         todoMsg.setTodoCreateTime(new TimeUtils().getCurrentDateAndTime());
-        todoMsg.setTodoType(1);
+        todoMsg.setTodoCreateDate(new TimeUtils().getCurrentDate());
         return todoMsg;
     }
 }

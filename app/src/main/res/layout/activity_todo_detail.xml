@@ -126,7 +126,14 @@
             android:layout_height="24dp"/>
     </LinearLayout>
 
-
+    <TextView
+        android:id="@+id/deleteTodo"
+        android:layout_below="@+id/todoDetailLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:text="@string/delete"
+        android:textSize="20sp"/>
     <TextView
         android:id="@+id/confirmTodo"
         android:layout_below="@+id/todoDetailLayout"

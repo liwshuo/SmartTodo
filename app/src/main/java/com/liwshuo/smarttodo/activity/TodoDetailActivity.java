@@ -33,6 +33,7 @@ public class TodoDetailActivity extends Activity implements View.OnClickListener
     private TextView todoTagText;
     private EditText todoNoteText;
     private TextView confirmTodo;
+    private TextView deleteTodo;
     private TodoMsg todoMsg;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +46,8 @@ public class TodoDetailActivity extends Activity implements View.OnClickListener
         todoNoteText = (EditText) findViewById(R.id.todoNoteText);
         confirmTodo = (TextView) findViewById(R.id.confirmTodo);
         confirmTodo.setOnClickListener(this);
+        deleteTodo = (TextView) findViewById(R.id.deleteTodo);
+        deleteTodo.setOnClickListener(this);
         todoDateText.setOnClickListener(this);
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
@@ -88,6 +91,7 @@ public class TodoDetailActivity extends Activity implements View.OnClickListener
             case R.id.confirmTodo: {
                 generateTodoMsg();
                 DBManager.getInstance().updateTodo(todoMsg);
+         //       AppConfig.updateWidget(this);
                 Intent intent = new Intent();
                 setResult(RESULT_OK, intent);
                 LogUtil.d(TAG,"confirmTodo");
@@ -96,6 +100,14 @@ public class TodoDetailActivity extends Activity implements View.OnClickListener
                 }
                 finish();
             }
+            break;
+            case R.id.deleteTodo: {
+                DBManager.getInstance().deleteTodo(todoMsg.get_id());
+                Intent intent = new Intent();
+                setResult(RESULT_OK, intent);
+                finish();
+            }
+            break;
         }
     }
 
@@ -123,20 +135,22 @@ public class TodoDetailActivity extends Activity implements View.OnClickListener
         todoMsg.setTodoTitle(todoTitle);
         todoMsg.setTodoNote(todoNote);
         if (!TextUtils.isEmpty(todoDate)) {
-            todoMsg.setTodoDate(todoDate.split(" ")[0]);
-            todoMsg.setTodoTime(todoDate.split(" ")[1]);
-            if(todoDate.split(" ")[0].compareTo(new TimeUtils().getCurrentDate()) > 0){
-                todoMsg.setTodoType(2);
+            String[] todoDateArray = todoDate.split(" ");
+            todoMsg.setTodoDate(todoDateArray[0]);
+            todoMsg.setTodoTime(todoDateArray[1]);
+            if(todoDateArray[0].compareTo(new TimeUtils().getCurrentDate()) > 0){
+                todoMsg.setTodoType(AppConfig.TODO_LATER_TYPE);
             }else {
-                todoMsg.setTodoType(1);
+                todoMsg.setTodoType(AppConfig.TODO_TODAY_TYPE);
             }
         }else {
-            todoMsg.setTodoType(1);
+            todoMsg.setTodoType(AppConfig.TODO_TODAY_TYPE);
         }
         todoMsg.setTodoRepeatWeek(todoRepeat);
         todoMsg.setTodoRepeatMonth(todoRepeat);
         todoMsg.setTodoTag(todoTag);
         todoMsg.setTodoUpdateTime(new TimeUtils().getCurrentDateAndTime());
+        todoMsg.setTodoUpdateDate(new TimeUtils().getCurrentDate());
     }
 
 }

@@ -37,6 +37,11 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        if(oldVersion == 1) {
+            if (newVersion == 2) {
+                db.execSQL("alter table "+AppConfig.TABLE_NAME+" add todo_create_date text");
+                db.execSQL("alter table "+AppConfig.TABLE_NAME+" add todo_update_date text");
+            }
+        }
     }
 }

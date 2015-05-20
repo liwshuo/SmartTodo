@@ -15,6 +15,7 @@ import com.liwshuo.smarttodo.utils.TimeUtils;
  * Created by shuo on 2015/4/16.
  */
 public class DBManager {
+    private final String TAG = DBManager.class.getSimpleName();
     private SQLiteDatabase db;
     private static DBManager dbManager;
 
@@ -45,6 +46,7 @@ public class DBManager {
     public void addTodo(TodoMsg todoMsg) {
         ContentValues contentValues = getContentValues(todoMsg);
         db.insert(AppConfig.TABLE_NAME, null, contentValues);
+        AppConfig.updateWidget(AppController.getContext());
     }
 
     /**
@@ -55,6 +57,7 @@ public class DBManager {
         ContentValues contentValues = getContentValues(todoMsg);
         String[] whereClauses = {String.valueOf(todoMsg.get_id())};
         db.update(AppConfig.TABLE_NAME, contentValues, "_id = ?", whereClauses);
+        AppConfig.updateWidget(AppController.getContext());
     }
 
     /**
@@ -100,6 +103,7 @@ public class DBManager {
                 break;
         }
         db.update(AppConfig.TABLE_NAME, contentValues, "_id=?", new String[]{String.valueOf(_id)});
+        AppConfig.updateWidget(AppController.getContext());
     }
 
     /**
@@ -116,6 +120,20 @@ public class DBManager {
      */
     public Cursor getTodayTodo() {
         return db.query(AppConfig.TABLE_NAME, null, AppConfig.TODO_TYPE_COLUMN + " = ?", new String[]{"1"}, null, null, null, null);
+    }
+
+    /**
+     * 获取包含在widget上显示的Todo， todo类型为未完成的当天todo和已完成的且更新时间为当天的todo
+     * @return
+     */
+    public Cursor getTodayTodoContainsUndone() {
+        LogUtil.d(TAG, new TimeUtils().getCurrentDate());
+        String whereClause = AppConfig.TODO_TYPE_COLUMN + " = ? or (" + AppConfig.TODO_UPDATE_DATE_COLUMN + " = ? and " + AppConfig.TODO_TYPE_COLUMN + " = ?)";
+        String[] whereArgs =  new String[]{String.valueOf(AppConfig.TODO_TODAY_TYPE), new TimeUtils().getCurrentDate(), String.valueOf(AppConfig.TODO_DONE_TYPE)};
+        Cursor cursor = db.query(AppConfig.TABLE_NAME, null, whereClause,
+              whereArgs, null, null, AppConfig.TODO_TYPE_COLUMN +" desc", null);
+        LogUtil.d(TAG, "count"+cursor.getCount());
+        return cursor;
     }
 
     /**
@@ -137,17 +155,46 @@ public class DBManager {
     /**
      * 删除Todo
      */
-    public void deleteTodo() {
-
+    public void deleteTodo(int id) {
+        db.delete(AppConfig.TABLE_NAME, AppConfig.TODO_ID_COLUMN + " = ?", new String[]{String.valueOf(id)});
+        AppConfig.updateWidget(AppController.getContext());
     }
 
-
-    public void setTodoDone() {
-
+    /**
+     * 获取Todo的类型
+     * @param id
+     * @return
+     */
+    public int getTodoType(int id) {
+        Cursor cursor = db.query(AppConfig.TABLE_NAME, null, AppConfig.TODO_ID_COLUMN + " = ?", new String[]{String.valueOf(id)}, null, null, null, null);
+        cursor.moveToFirst();
+        return cursor.getInt(cursor.getColumnIndex(AppConfig.TODO_TYPE_COLUMN));
     }
 
-    public void setTodoUndone() {
+    /**
+     * 设置Todo为已完成
+     * @param id
+     */
+    public void setTodoDone(int id) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(AppConfig.TODO_TYPE_COLUMN, 0);
+        contentValues.put(AppConfig.TODO_UPDATE_DATE_COLUMN, new TimeUtils().getCurrentDate());
+        String[] args = {String.valueOf(id)};
+        db.update(AppConfig.TABLE_NAME, contentValues, AppConfig.TODO_ID_COLUMN + " = ?", args);
+        AppConfig.updateWidget(AppController.getContext());
+    }
 
+    /**
+     * 设置Todo为当天未完成
+     * @param id
+     */
+    public void setTodoUndone(int id) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(AppConfig.TODO_TYPE_COLUMN, 1);
+        contentValues.put(AppConfig.TODO_UPDATE_DATE_COLUMN, new TimeUtils().getCurrentDate());
+        String[] args = {String.valueOf(id)};
+        db.update(AppConfig.TABLE_NAME, contentValues, AppConfig.TODO_ID_COLUMN + " = ?", args);
+        AppConfig.updateWidget(AppController.getContext());
     }
 
     public void closeDB() {

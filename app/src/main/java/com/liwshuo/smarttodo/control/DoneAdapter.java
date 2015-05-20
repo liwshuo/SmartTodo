@@ -2,6 +2,7 @@ package com.liwshuo.smarttodo.control;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -55,7 +56,8 @@ public class DoneAdapter extends BaseAdapter {
     public void bindView(View view, Context context, Cursor cursor) {
         ViewHolder viewHolder = (ViewHolder) view.getTag();
         viewHolder.doneTodoView.setText(cursor.getString(viewHolder.titleIndex));
-        viewHolder.doneTodoView.getPaint().setFlags(Paint. STRIKE_THRU_TEXT_FLAG );
+        viewHolder.doneTodoView.setTextColor(Color.GRAY); //设置已经完成的todo为灰色
+        viewHolder.doneTodoView.getPaint().setFlags(Paint. STRIKE_THRU_TEXT_FLAG ); //在已经完成的todo内容上加上横线
         viewHolder.doneTodoTime.setText(cursor.getString(viewHolder.timeIndex));
         viewHolder.doneTodoDate.setText(cursor.getString(viewHolder.dateIndex));
     }
