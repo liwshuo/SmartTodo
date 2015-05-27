@@ -150,7 +150,7 @@ public class ClipboardService extends Service {
                                     editText.setText("");
                                     FloatView floatView = AppController.getInstance().getFloatView();
                                     floatView.destroy();
-                                    AlarmIntentService.actionStart(getApplicationContext(), date, time, null, title);
+                                 //   AlarmIntentService.actionStart(getApplicationContext(), date, time, null, title);
                                 }
                                 return true;
                             }

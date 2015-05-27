@@ -42,6 +42,16 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
                 db.execSQL("alter table "+AppConfig.TABLE_NAME+" add todo_create_date text");
                 db.execSQL("alter table "+AppConfig.TABLE_NAME+" add todo_update_date text");
             }
+            if (newVersion == 3) {
+                db.execSQL("alter table "+AppConfig.TABLE_NAME+" add todo_create_date text");
+                db.execSQL("alter table "+AppConfig.TABLE_NAME+" add todo_update_date text");
+                db.execSQL("alter table "+AppConfig.TABLE_NAME+" add request_code integer");
+            }
+        }
+        if (oldVersion == 2) {
+            if (newVersion == 3) {
+                db.execSQL("alter table "+AppConfig.TABLE_NAME+" add request_code integer");
+            }
         }
     }
 }

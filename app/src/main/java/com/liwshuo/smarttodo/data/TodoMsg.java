@@ -3,6 +3,10 @@ package com.liwshuo.smarttodo.data;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.liwshuo.smarttodo.utils.TimeUtils;
+
+import java.util.Calendar;
+
 /**
  * Todo的类
  * Created by shuo on 2015/4/16.
@@ -22,6 +26,7 @@ public class TodoMsg implements Parcelable {
     private String todoTag; //todo的标签
     private String todoCreateDate;
     private String todoUpdateDate;
+    private int todoRequestCode;
 
     public void set_id(int _id) {
         this._id = _id;
@@ -33,10 +38,6 @@ public class TodoMsg implements Parcelable {
 
     public void setTodoNote(String todoNote) {
         this.todoNote = todoNote;
-    }
-
-    public void setTodoCreateTime(String todoCreateTime) {
-        this.todoCreateTime = todoCreateTime;
     }
 
     public void setTodoDate(String todoDate) {
@@ -63,6 +64,14 @@ public class TodoMsg implements Parcelable {
         this.todoType = todoType;
     }
 
+    public void setTodoCreateTime(String todoCreateTime) {
+        this.todoCreateTime = todoCreateTime;
+        if (todoCreateTime == null) {
+            todoCreateTime = new TimeUtils().getCurrentDateAndTime();
+        }
+        setTodoRequestCode(getRequestCode(todoCreateTime));
+    }
+
     public void setTodoUpdateTime(String todoUpdateTime) {
         this.todoUpdateTime = todoUpdateTime;
     }
@@ -73,6 +82,10 @@ public class TodoMsg implements Parcelable {
 
     public void setTodoUpdateDate(String todoUpdateDate) {
         this.todoUpdateDate = todoUpdateDate;
+    }
+
+    public void setTodoRequestCode(int todoRequestCode) {
+        this.todoRequestCode = todoRequestCode;
     }
 
     public int get_id() {
@@ -135,6 +148,10 @@ public class TodoMsg implements Parcelable {
         return todoUpdateDate;
     }
 
+    public int getTodoRequestCode() {
+        return todoRequestCode;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -156,6 +173,7 @@ public class TodoMsg implements Parcelable {
         dest.writeString(todoTag);
         dest.writeString(todoCreateDate);
         dest.writeString(todoUpdateDate);
+        dest.writeInt(todoRequestCode);
     }
 
     public static final Creator<TodoMsg> CREATOR = new Creator<TodoMsg>() {
@@ -177,6 +195,7 @@ public class TodoMsg implements Parcelable {
             todoMsg.setTodoTag(source.readString());
             todoMsg.setTodoCreateDate(source.readString());
             todoMsg.setTodoUpdateDate(source.readString());
+            todoMsg.setTodoRequestCode(source.readInt());
             return todoMsg;
         }
 
@@ -185,4 +204,18 @@ public class TodoMsg implements Parcelable {
             return new TodoMsg[size];
         }
     };
+
+    private int getRequestCode(String todoCreateTime) {
+        String[] dateAndTimeArray = todoCreateTime.split(" ");
+        String[] dateArray = dateAndTimeArray[0].split("-");
+        String[] timeArray = dateAndTimeArray[1].split(":");
+        int year = Integer.parseInt(dateArray[0]);
+        int month = Integer.parseInt(dateArray[1]);
+        int day = Integer.parseInt(dateArray[2]);
+        int hour = Integer.parseInt(timeArray[0]);
+        int minute = Integer.parseInt(timeArray[1]);
+        int second = Integer.parseInt(timeArray[2]);
+        int requestCode = year * 100000 + month * 10000 + day * 1000 + hour * 100 + minute * 10 + second;
+        return requestCode;
+    }
 }

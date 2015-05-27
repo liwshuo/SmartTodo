@@ -53,13 +53,13 @@ public class TodoDeskWidget extends AppWidgetProvider {
        Intent intent = new Intent(context, TodoWidgetService.class);
         intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
         intent.setData(Uri.parse(intent.toUri(Intent.URI_INTENT_SCHEME)));
-        remoteViews.setRemoteAdapter(R.id.todoListWidget, intent); //ÉèÖÃremoteviewµÄÊÊÅäÆ÷
+        remoteViews.setRemoteAdapter(R.id.todoListWidget, intent); //è®¾ç½®remoteviewçš„é€‚é…å™¨
         Intent intent1 = new Intent();
  //       intent.setAction("android.appwidget.action.APPWIDGET_UPDATE");
         intent1.setClass(context, TodoDeskWidget.class);
         //  remoteViews.setOnClickFillInIntent(R.id.todoWidgetType, intent);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent1, PendingIntent.FLAG_UPDATE_CURRENT);
-        remoteViews.setPendingIntentTemplate(R.id.todoListWidget, pendingIntent); //ÅäºÏ½øĞĞ¿Ø¼şµÄµã»÷²Ù×÷£¬imageview
+        remoteViews.setPendingIntentTemplate(R.id.todoListWidget, pendingIntent); //é…åˆè¿›è¡Œæ§ä»¶çš„ç‚¹å‡»æ“ä½œï¼Œimageview
         remoteViews.setTextViewText(R.id.currentDateWidgetView, new TimeUtils().getCurrentDate());
         Intent intent2 = new Intent();
         intent2.setClass(context, TodoAddActivity.class);

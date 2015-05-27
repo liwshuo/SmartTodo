@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.liwshuo.smarttodo.control.AppController;
+import com.liwshuo.smarttodo.service.AlarmIntentService;
 import com.liwshuo.smarttodo.utils.AppConfig;
 import com.liwshuo.smarttodo.utils.LogUtil;
 import com.liwshuo.smarttodo.utils.TimeUtils;
@@ -47,6 +48,7 @@ public class DBManager {
         ContentValues contentValues = getContentValues(todoMsg);
         db.insert(AppConfig.TABLE_NAME, null, contentValues);
         AppConfig.updateWidget(AppController.getContext());
+        AlarmIntentService.actionStart(AppController.getContext(), todoMsg);
     }
 
     /**
@@ -58,6 +60,7 @@ public class DBManager {
         String[] whereClauses = {String.valueOf(todoMsg.get_id())};
         db.update(AppConfig.TABLE_NAME, contentValues, "_id = ?", whereClauses);
         AppConfig.updateWidget(AppController.getContext());
+        AlarmIntentService.actionStart(AppController.getContext(), todoMsg);
     }
 
     /**
@@ -142,6 +145,10 @@ public class DBManager {
      */
     public Cursor getDoneTodo() {
         return db.query(AppConfig.TABLE_NAME, null, AppConfig.TODO_TYPE_COLUMN + " = ?", new String[]{"0"}, null, null, null, null);
+    }
+
+    public Cursor getUndoneTodo() {
+        return db.query(AppConfig.TABLE_NAME, null, AppConfig.TODO_TYPE_COLUMN + " = ? or " + AppConfig.TODO_TYPE_COLUMN + " = ?", new String[]{"1", "2"}, null, null, null, null);
     }
 
     /**

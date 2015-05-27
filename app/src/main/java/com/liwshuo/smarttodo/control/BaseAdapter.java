@@ -57,6 +57,8 @@ public abstract class BaseAdapter extends CursorAdapter {
             todoMsg.setTodoUpdateTime(cursor.getString(cursor.getColumnIndexOrThrow(AppConfig.TODO_UPDATE_TIME_COLUMN)));
             todoMsg.setTodoTime(cursor.getString(cursor.getColumnIndexOrThrow(AppConfig.TODO_TIME_COLUMN)));
             todoMsg.setTodoTag(cursor.getString(cursor.getColumnIndexOrThrow(AppConfig.TODO_TAG_COLUMN)));
+            todoMsg.setTodoCreateDate(cursor.getString(cursor.getColumnIndexOrThrow(AppConfig.TODO_CREATE_DATE_COLUMN)));
+            todoMsg.setTodoUpdateDate(cursor.getString(cursor.getColumnIndexOrThrow(AppConfig.TODO_UPDATE_DATE_COLUMN)));
         }
         return todoMsg;
     }

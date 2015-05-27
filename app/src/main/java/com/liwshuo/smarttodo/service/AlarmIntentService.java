@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 
 
+import com.liwshuo.smarttodo.data.TodoMsg;
 import com.liwshuo.smarttodo.receiver.AlarmReceiver;
 import com.liwshuo.smarttodo.utils.LogUtil;
 
@@ -24,20 +25,17 @@ public class AlarmIntentService extends IntentService {
     /**
      * Creates an IntentService.  Invoked by your subclass's constructor.
      *
-     * @param name Used to name the worker thread, important only for debugging.
+     * @param
      */
     public AlarmIntentService() {  //intentservice的构造函数必须传入name，用来命名进程的名称，用来调试用的。这里我们使用自己的构造函数来调用父类的构造函数，name使用类名
         super(TAG);
     }
 
 
-    public static void actionStart(Context context, String notifyDate, String notifyTime, String notifyRepeat, String message) {
+    public static void actionStart(Context context, TodoMsg todoMsg) {
         Intent intent = new Intent(context, AlarmIntentService.class);
         Bundle bundle = new Bundle();
-        bundle.putString("notifyDate", notifyDate);
-        bundle.putString("notifyTime", notifyTime);
-        bundle.putString("notifyRepeat", notifyRepeat);
-        bundle.putString("message", message);
+        bundle.putParcelable("todoMsg", todoMsg);
         intent.putExtras(bundle);
         context.startService(intent);
     }
@@ -46,16 +44,17 @@ public class AlarmIntentService extends IntentService {
     protected void onHandleIntent(Intent intent) {
         LogUtil.d(TAG,"onHandleIntent");
         Bundle bundle = intent.getExtras();
-        String notifyDate = bundle.getString("notifyDate");
-        String notifyTime = bundle.getString("notifyTime");
-        String notifyRepeat = bundle.getString("notifyRepeat");
-        String message = bundle.getString("message");
+        TodoMsg todoMsg = bundle.getParcelable("todoMsg");
+        String notifyDate = todoMsg.getTodoDate();
+        String notifyTime = todoMsg.getTodoTime();
+        String notifyRepeat = null;
+        String title = todoMsg.getTodoTitle();
+        int requestCode = todoMsg.getTodoRequestCode();
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         long triggerTime = getTimeMillis(notifyDate, notifyTime);
         if(triggerTime > System.currentTimeMillis()){
-            int requestCode = getRequestCode();
             Intent broadcastIntent = new Intent(AlarmIntentService.this, AlarmReceiver.class);
-            broadcastIntent.putExtra("message", message);
+            broadcastIntent.putExtra("message", title);
             PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), requestCode, broadcastIntent, PendingIntent.FLAG_UPDATE_CURRENT);
             LogUtil.d(TAG, ""+triggerTime);
             LogUtil.d(TAG, ""+System.currentTimeMillis());
@@ -76,17 +75,7 @@ public class AlarmIntentService extends IntentService {
         return calendar.getTimeInMillis();
     }
 
-    private int getRequestCode() {
-        Calendar calendar = Calendar.getInstance();
-        int year = calendar.get(Calendar.YEAR);
-        int month = calendar.get(Calendar.MONTH);
-        int day = calendar.get(Calendar.DAY_OF_MONTH);
-        int hour = calendar.get(Calendar.HOUR_OF_DAY);
-        int minute = calendar.get(Calendar.MINUTE);
-        int second = calendar.get(Calendar.SECOND);
-        int code = year * 100000 + month * 10000 + day * 1000 + hour * 100 + minute * 10 + second;
-        return code;
-    }
+
 
     private long getRepeatMillis(String date, String time, String repeat) {
         return 0;

@@ -95,9 +95,9 @@ public class TodoDetailActivity extends Activity implements View.OnClickListener
                 Intent intent = new Intent();
                 setResult(RESULT_OK, intent);
                 LogUtil.d(TAG,"confirmTodo");
-                if(!TextUtils.isEmpty(todoDateText.getText().toString())) {
-                    AlarmIntentService.actionStart(getApplicationContext(), todoMsg.getTodoDate(), todoMsg.getTodoTime(), null, todoMsg.getTodoTitle());
-                }
+            //    if(!TextUtils.isEmpty(todoDateText.getText().toString())) {
+            //        AlarmIntentService.actionStart(getApplicationContext(), todoMsg.getTodoDate(), todoMsg.getTodoTime(), null, todoMsg.getTodoTitle());
+           //     }
                 finish();
             }
             break;
